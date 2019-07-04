@@ -1,9 +1,10 @@
 package cn.lvb.bean;
 
 public class Tourists {
+	private int id;
 	private String phone;
 	private String name;
-	private int sex;
+	private String sex;
 	private String idcard;
 	private String password;
 	private String nickname;
@@ -12,6 +13,18 @@ public class Tourists {
 	}
 	public String getPhone() {
 		return phone;
+	}
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
@@ -22,10 +35,10 @@ public class Tourists {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public int getSex() {
+	public String getSex() {
 		return sex;
 	}
-	public void setSex(int sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 	public String getIdcard() {

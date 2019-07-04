@@ -1,10 +1,10 @@
 package cn.lvb.bean;
 
 public class Tickets {
-	private String id;
-	private String price;
+	private int id;
+	private double price;
 	private String name;
-	private String spotid;
+	private int spotid;
 	
 	public Tickets() {
 		super();
@@ -13,28 +13,28 @@ public class Tickets {
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
 	 * @return the price
 	 */
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -55,17 +55,18 @@ public class Tickets {
 	/**
 	 * @return the spotid
 	 */
-	public String getSpotid() {
+	public int getSpotid() {
 		return spotid;
 	}
 
 	/**
 	 * @param spotid the spotid to set
 	 */
-	public void setSpotid(String spotid) {
+	public void setSpotid(int spotid) {
 		this.spotid = spotid;
 	}
 
+	
 
 	
 }

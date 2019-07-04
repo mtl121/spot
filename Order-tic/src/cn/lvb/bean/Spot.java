@@ -3,23 +3,38 @@ package cn.lvb.bean;
 import java.sql.Date;
 
 public class Spot {
-	private String id;
+	private int id;
 	private String name;
 	private String address;
 	private String pic;
 	private String abst;
 	private Date start;
 	private Date end;
+	private String keyword;
 	
+	/**
+	 * @return the keyword
+	 */
+	public String getKeyword() {
+		return keyword;
+	}
+
+	/**
+	 * @param keyword the keyword to set
+	 */
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
 	public Spot() {
 		super();
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

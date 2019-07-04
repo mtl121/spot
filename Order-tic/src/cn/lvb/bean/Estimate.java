@@ -1,24 +1,24 @@
 package cn.lvb.bean;
 
 public class Estimate {
-	private String Esti_id;
+	private int Esti_id;
 	private String Esti_content;
 	private String Esti_star;
-	private String Tou_phone;
-	private String Spot_id;
+	private int Tou_id;
+	private int Spot_id;
 	public Estimate() {
 		super();
 	}
 	/**
 	 * @return the esti_id
 	 */
-	public String getEsti_id() {
+	public int getEsti_id() {
 		return Esti_id;
 	}
 	/**
 	 * @param esti_id the esti_id to set
 	 */
-	public void setEsti_id(String esti_id) {
+	public void setEsti_id(int esti_id) {
 		Esti_id = esti_id;
 	}
 	/**
@@ -46,27 +46,27 @@ public class Estimate {
 		Esti_star = esti_star;
 	}
 	/**
-	 * @return the tou_phone
+	 * @return the tou_id
 	 */
-	public String getTou_phone() {
-		return Tou_phone;
+	public int getTou_id() {
+		return Tou_id;
 	}
 	/**
-	 * @param tou_phone the tou_phone to set
+	 * @param tou_id the tou_id to set
 	 */
-	public void setTou_phone(String tou_phone) {
-		Tou_phone = tou_phone;
+	public void setTou_id(int tou_id) {
+		Tou_id = tou_id;
 	}
 	/**
 	 * @return the spot_id
 	 */
-	public String getSpot_id() {
+	public int getSpot_id() {
 		return Spot_id;
 	}
 	/**
 	 * @param spot_id the spot_id to set
 	 */
-	public void setSpot_id(String spot_id) {
+	public void setSpot_id(int spot_id) {
 		Spot_id = spot_id;
 	}
 	

@@ -2,60 +2,61 @@ package cn.lvb.bean;
 
 
 public class Orderdetail {
-	private String id;
-	private String Ticketid;
-	private String num;
-	private String Orderid;
+	private int id;
+	private int Ticketid;
+	private int num;
+	private int Orderid;
 	public Orderdetail() {
 		super();
 	}
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
 	 * @return the ticketid
 	 */
-	public String getTicketid() {
+	public int getTicketid() {
 		return Ticketid;
 	}
 	/**
 	 * @param ticketid the ticketid to set
 	 */
-	public void setTicketid(String ticketid) {
+	public void setTicketid(int ticketid) {
 		Ticketid = ticketid;
 	}
 	/**
 	 * @return the num
 	 */
-	public String getNum() {
+	public int getNum() {
 		return num;
 	}
 	/**
 	 * @param num the num to set
 	 */
-	public void setNum(String num) {
+	public void setNum(int num) {
 		this.num = num;
 	}
 	/**
 	 * @return the orderid
 	 */
-	public String getOrderid() {
+	public int getOrderid() {
 		return Orderid;
 	}
 	/**
 	 * @param orderid the orderid to set
 	 */
-	public void setOrderid(String orderid) {
+	public void setOrderid(int orderid) {
 		Orderid = orderid;
 	}
+	
 	
 }

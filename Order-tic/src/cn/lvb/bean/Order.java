@@ -3,26 +3,26 @@ package cn.lvb.bean;
 import java.sql.Date;
 
 public class Order {
-	private String id;
+	private int id;
 	private Date createtime;
 	private Date usetime;
-	private String price;
+	private double price;
 	private String state;
-	private String phone;
-	private String spotid;
+	private int tid;
+	private int spotid;
 	public Order() {
 		super();
 	}
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	/**
@@ -52,13 +52,13 @@ public class Order {
 	/**
 	 * @return the price
 	 */
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
 	/**
 	 * @param price the price to set
 	 */
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	/**
@@ -74,29 +74,30 @@ public class Order {
 		this.state = state;
 	}
 	/**
-	 * @return the phone
+	 * @return the tid
 	 */
-	public String getPhone() {
-		return phone;
+	public int getTid() {
+		return tid;
 	}
 	/**
-	 * @param phone the phone to set
+	 * @param tid the tid to set
 	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
 	/**
 	 * @return the spotid
 	 */
-	public String getSpotid() {
+	public int getSpotid() {
 		return spotid;
 	}
 	/**
 	 * @param spotid the spotid to set
 	 */
-	public void setSpotid(String spotid) {
+	public void setSpotid(int spotid) {
 		this.spotid = spotid;
 	}
+	
 	
 	
 }
