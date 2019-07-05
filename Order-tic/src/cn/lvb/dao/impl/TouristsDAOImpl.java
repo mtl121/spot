@@ -37,20 +37,28 @@ public class TouristsDAOImpl implements TouristsDAO {
 	
 	//删除信息
 	@Override
-	public boolean delete(String id) {
+	public boolean delete(int id) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 
-		String sql = "delete from tourists where Tou_phone=? ";
+		String sql = "SET foreign_key_checks = 0";
+		String sql1 ="delete from tourists where Tou_id=?";
+		String sql2= "SET foreign_key_checks = 1";
 
 		try {
 			System.out.println("*****" + id);
 			conn = JdbcUtil.getConnection();
+			conn.setAutoCommit(false);
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
+			stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql1);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql2);
 			int rows = stmt.executeUpdate();
-
+			conn.commit();
+			
 			if (rows > 0)
 				return true;
 			else
@@ -66,8 +74,9 @@ public class TouristsDAOImpl implements TouristsDAO {
 	@Override
 	public boolean update(Tourists bean) {
 		
-		String sql = "update tourists set Tou_name=?," + "Tou_sex=?,"+ "Tou_idcardnum=?," + "Tou_password=?,"  + "Tou_nickname=? where Tou_phone=?";
-
+		String sql = "update tourists set Tou_name=?," + "Tou_sex=?,"+ "Tou_idcardnum=?," + "Tou_password=?,"  + "Tou_nickname=?,"+"Tou_phone=? where Tou_id=?";
+		System.out.println(bean.getIdcard()+"+"+bean.getName()+"+"+bean.getNickname());
+		
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -77,13 +86,12 @@ public class TouristsDAOImpl implements TouristsDAO {
 			stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, bean.getName());
-			stmt.setInt(2, bean.getSex());
+			stmt.setString(2, bean.getSex());
 			stmt.setString(3, bean.getIdcard());
 			stmt.setString(4, bean.getPassword());
 			stmt.setString(5, bean.getNickname());
-			
-
 			stmt.setString(6, bean.getPhone());
+			stmt.setInt(7, bean.getId());
 			int rows = stmt.executeUpdate();
 
 			if (rows > 0)
@@ -139,7 +147,7 @@ public class TouristsDAOImpl implements TouristsDAO {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select Tou_phone, Tou_name, Tou_sex, Tou_idcardnum,Tou_password , Tou_nickname from tourists limit ?, ? ";
+		String sql = "select Tou_id,Tou_phone, Tou_name, Tou_sex, Tou_idcardnum,Tou_password , Tou_nickname from tourists limit ?, ? ";
 
 		try {
 			List<Tourists> list = new ArrayList<Tourists>();
@@ -154,10 +162,10 @@ public class TouristsDAOImpl implements TouristsDAO {
 			// 5���������
 			while (rs.next()) {
 				Tourists bean = new Tourists();
-
+				bean.setId(rs.getInt("Tou_id"));
 				bean.setPhone(rs.getString("Tou_phone"));
 				bean.setName(rs.getString("Tou_name"));
-				bean.setSex(rs.getInt("Tou_sex"));
+				bean.setSex(rs.getString("Tou_sex"));
 				bean.setIdcard(rs.getString("Tou_idcardnum"));
 				bean.setPassword(rs.getString("Tou_password"));
 				bean.setNickname(rs.getString("Tou_nickname"));
@@ -218,7 +226,7 @@ public class TouristsDAOImpl implements TouristsDAO {
 						Tourists user = new Tourists();
 						user.setPhone(rs.getString("Tou_phone"));
 						user.setName(rs.getString("Tou_name"));
-						user.setSex(rs.getInt("Tou_sex"));
+						user.setSex(rs.getString("Tou_sex"));
 						user.setIdcard(rs.getString("Tou_idcardnum"));
 						user.setPassword(rs.getString("Tou_password"));
 						user.setNickname(rs.getString("Tou_nickname"));
@@ -236,4 +244,46 @@ public class TouristsDAOImpl implements TouristsDAO {
 		
 	}
 
+	@Override
+	public boolean exist(String phone) {
+		Connection conn=null;
+		PreparedStatement stmt=null;
+		ResultSet rs =null;
+		
+
+		String sql = "select  Tou_phone from tourists where Tou_phone=? ";
+		
+	
+		
+		try
+		{
+				
+			conn = JdbcUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, phone);
+		
+			rs  = stmt.executeQuery();
+
+		
+			if(rs.next()){
+				return true;
+				//(rs.getString("birthday"));
+				
+			}
+			return false;
+		
+			
+		}
+		catch(Exception e)
+		{
+			throw new RuntimeException(e);
+			
+		}
+		finally
+		{
+			JdbcUtil.release(rs, stmt, conn);
+			
+		}
+	}
 }

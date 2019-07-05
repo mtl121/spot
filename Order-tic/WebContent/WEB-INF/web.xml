@@ -29,4 +29,14 @@
     <servlet-name>Myordersq</servlet-name>
     <url-pattern>/Myordersq</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Myprob</display-name>
+    <servlet-name>Myprob</servlet-name>
+    <servlet-class>cn.lvb.action.Myprob</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Myprob</servlet-name>
+    <url-pattern>/Myprob</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -16,7 +16,7 @@ public class SpotDAOImpl implements SpotDAO {
 	@Override
 	public boolean add( Spot spot  ) {
 		
-		String sql = "insert into spot(Spot_id,Spot_name,Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end)values(?,?,?,?,?,?,?)";
+		String sql = "insert into spot(Spot_id,Spot_name,Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end,keyword)values(?,?,?,?,?,?,?,?)";
 		
 		Connection conn=null;
 		PreparedStatement stmt=null;
@@ -28,13 +28,14 @@ public class SpotDAOImpl implements SpotDAO {
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 
-			stmt.setString(1, spot.getId());
+			stmt.setInt(1, spot.getId());
 			stmt.setString(2, spot.getName());
 			stmt.setString(3, spot.getAddress());
 			stmt.setString(4, spot.getAbst());
 			stmt.setString(5, spot.getPic());
 			stmt.setDate(6, spot.getStart());
 			stmt.setDate(7, spot.getEnd());
+			stmt.setString(8, spot.getKeyword());
 			
 			int rows  = stmt.executeUpdate();
 
@@ -55,21 +56,21 @@ public class SpotDAOImpl implements SpotDAO {
 	}
 
 	@Override
-	public boolean delete(String name) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		
 
 		Connection conn=null;
 		PreparedStatement stmt=null;
 		ResultSet rs =null;
-		String sql = "delete from spot where Spot_name=? ";
+		String sql = "delete from spot where Spot_id=? ";
 		
 		try
 		{
 			
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, name);
+			stmt.setInt(1, id);
 			
 			int rows  = stmt.executeUpdate();
 			
@@ -148,7 +149,7 @@ public class SpotDAOImpl implements SpotDAO {
 	
 	@Override
 	public boolean update(Spot spot) {
-		String sql = "update  spot set  Spot_name=?,Spot_ad=?,Spot_abst=?,Spot_pic=?,Spot_sta=?,Spot_end=? where Spot_id=?";
+		String sql = "update  spot set Spot_name=?,Spot_ad=?,Spot_abst=?,Spot_pic=?,Spot_sta=?,Spot_end=?, keyword=?where Spot_id=?";
 		
 		Connection conn=null;
 		PreparedStatement stmt=null;
@@ -161,13 +162,14 @@ public class SpotDAOImpl implements SpotDAO {
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			
-			stmt.setString(7, spot.getId());
+			stmt.setInt(8, spot.getId());
 			stmt.setString(1, spot.getName());
 			stmt.setString(2, spot.getAddress());
 			stmt.setString(3, spot.getAbst());
 			stmt.setString(4, spot.getPic());
 			stmt.setDate(5, spot.getStart());
 			stmt.setDate(6, spot.getEnd());
+			stmt.setString(7, spot.getKeyword());
 			
 			int rows  = stmt.executeUpdate();
 
@@ -193,7 +195,7 @@ public class SpotDAOImpl implements SpotDAO {
 		PreparedStatement stmt=null;
 		ResultSet rs =null;
 			
-		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end from spot where Spot_name=?  ";
+		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end,keyword from spot where Spot_name=?  ";
 		
 		
 		try
@@ -210,13 +212,14 @@ public class SpotDAOImpl implements SpotDAO {
 			if(rs.next()){
 				Spot  spot = new Spot();
 				
-				spot.setId(rs.getString("Spot_id"));
+				spot.setId(rs.getInt("Spot_id"));
 				spot.setName(rs.getString("Spot_name"));
 				spot.setAddress(rs.getString("Spot_ad"));
 				spot.setAbst(rs.getString("Spot_abst"));
 				spot.setPic(rs.getString("Spot_pic"));
 				spot.setStart(rs.getDate("Spot_sta"));
 				spot.setEnd(rs.getDate("Spot_end"));
+				spot.setKeyword(rs.getString("keyword"));
 				
 				return spot;
 			}
@@ -241,7 +244,7 @@ public class SpotDAOImpl implements SpotDAO {
 		PreparedStatement stmt=null;
 		ResultSet rs =null;
 		
-		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end from spot ";
+		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end,keyword from spot ";
 		
 		
 		try
@@ -255,14 +258,14 @@ public class SpotDAOImpl implements SpotDAO {
 			//5���������
 			while(rs.next()){
 				Spot spot = new Spot();
-				spot.setId(rs.getString("Spot_id"));
+				spot.setId(rs.getInt("Spot_id"));
 				spot.setName(rs.getString("Spot_name"));
 				spot.setAddress(rs.getString("Spot_ad"));
 				spot.setAbst(rs.getString("Spot_abst"));
 				spot.setPic(rs.getString("Spot_pic"));
 				spot.setStart(rs.getDate("Spot_sta"));
 				spot.setEnd(rs.getDate("Spot_end"));
-				
+				spot.setKeyword(rs.getString("keyword"));
 				
 				list.add(spot);
 				
@@ -317,7 +320,7 @@ public class SpotDAOImpl implements SpotDAO {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end from spot limit ?, ? ";
+		String sql = "select Spot_id, Spot_name, Spot_ad,Spot_abst,Spot_pic,Spot_sta,Spot_end,keyword from spot limit ?, ? ";
 
 		try {
 			List<Spot> list = new ArrayList<Spot>();
@@ -332,13 +335,14 @@ public class SpotDAOImpl implements SpotDAO {
 			// 5���������
 			while (rs.next()) {
 				Spot spot = new Spot();
-				spot.setId(rs.getString("Spot_id"));
+				spot.setId(rs.getInt("Spot_id"));
 				spot.setName(rs.getString("Spot_name"));
 				spot.setAddress(rs.getString("Spot_ad"));
 				spot.setAbst(rs.getString("Spot_abst"));
 				spot.setPic(rs.getString("Spot_pic"));
 				spot.setStart(rs.getDate("Spot_sta"));
 				spot.setEnd(rs.getDate("Spot_end"));
+				spot.setKeyword(rs.getString("keyword"));
 				
 				
 				list.add(spot);

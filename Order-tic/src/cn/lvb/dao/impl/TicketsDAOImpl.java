@@ -28,10 +28,10 @@ public class TicketsDAOImpl implements TicketsDAO {
 			stmt = conn.prepareStatement(sql);
 			
 
-			stmt.setString(1, tickets.getId());
-			stmt.setString(2, tickets.getPrice());
+			stmt.setInt(1, tickets.getId());
+			stmt.setDouble(2, tickets.getPrice());
 			stmt.setString(3, tickets.getName());
-			stmt.setString(4, tickets.getSpotid());
+			stmt.setInt(4, tickets.getSpotid());
 			
 			
 			int rows  = stmt.executeUpdate();
@@ -53,7 +53,7 @@ public class TicketsDAOImpl implements TicketsDAO {
 	}
 
 	@Override
-	public boolean delete(String name) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		
 
@@ -62,14 +62,14 @@ public class TicketsDAOImpl implements TicketsDAO {
 		ResultSet rs =null;
 		
 		
-		String sql = "delete from ticket where Ticket_name=? ";
+		String sql = "delete from ticket where Ticket_id=? ";
 		
 		try
 		{
 			
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, name);
+			stmt.setInt(1, id);
 			
 			int rows  = stmt.executeUpdate();
 			
@@ -115,10 +115,10 @@ public class TicketsDAOImpl implements TicketsDAO {
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			
-			stmt.setString(1, tickets.getSpotid());
-			stmt.setString(2, tickets.getPrice());
+			stmt.setInt(1, tickets.getSpotid());
+			stmt.setDouble(2, tickets.getPrice());
 			stmt.setString(3, tickets.getName());
-			
+			stmt.setInt(4, tickets.getId());
 			int rows  = stmt.executeUpdate();
 
 		    if(rows>0)
@@ -173,10 +173,10 @@ public class TicketsDAOImpl implements TicketsDAO {
 			if(rs.next()){
 				Tickets tickets = new Tickets();
 			
-				tickets.setId(rs.getString("Ticket_id"));
+				tickets.setId(rs.getInt("Ticket_id"));
 				tickets.setName(rs.getString("Ticket_name"));
-				tickets.setPrice(rs.getString("Ticket_price"));
-				tickets.setSpotid(rs.getString("Spot_i"));
+				tickets.setPrice(rs.getDouble("Ticket_price"));
+				tickets.setSpotid(rs.getInt("Spot_i"));
 				return tickets;
 			}
 			return null;
@@ -224,10 +224,10 @@ public class TicketsDAOImpl implements TicketsDAO {
 				
 				Tickets tickets = new Tickets();
 				
-				tickets.setId(rs.getString("Ticket_id"));
+				tickets.setId(rs.getInt("Ticket_id"));
 				tickets.setName(rs.getString("Ticket_name"));
-				tickets.setPrice(rs.getString("Ticket_price"));
-				tickets.setSpotid(rs.getString("Spot_i"));
+				tickets.setPrice(rs.getDouble("Ticket_price"));
+				tickets.setSpotid(rs.getInt("Spot_i"));
 				
 				
 				list.add(tickets);
@@ -355,10 +355,10 @@ public class TicketsDAOImpl implements TicketsDAO {
 			while (rs.next()) {
 				Tickets tickets = new Tickets();
 				
-				tickets.setId(rs.getString("Ticket_id"));
+				tickets.setId(rs.getInt("Ticket_id"));
 				tickets.setName(rs.getString("Ticket_name"));
-				tickets.setPrice(rs.getString("Ticket_price"));
-				tickets.setSpotid(rs.getString("Spot_i"));
+				tickets.setPrice(rs.getDouble("Ticket_price"));
+				tickets.setSpotid(rs.getInt("Spot_i"));
 				
 				
 				list.add(tickets);

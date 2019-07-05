@@ -8,7 +8,7 @@ public interface TicketsDAO {
 
 	
 	public boolean add( Tickets tickets  );
-	public boolean delete(String name);
+	public boolean delete(int id);
 	
 	public boolean exist(String name);
 	public boolean update(   Tickets tickets  );

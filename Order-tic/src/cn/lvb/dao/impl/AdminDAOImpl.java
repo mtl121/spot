@@ -50,7 +50,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public boolean delete(String username) {
+	public boolean delete(int id) {
 		// TODO Auto-generated method stub
 		
 
@@ -59,14 +59,14 @@ public class AdminDAOImpl implements AdminDAO {
 		ResultSet rs =null;
 		
 
-		String sql = "delete from admin where username=? ";
+		String sql = "delete from admin where id=? ";
 		
 		try
 		{
 			
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, username);
+			stmt.setInt(1, id);
 			
 			int rows  = stmt.executeUpdate();
 			
@@ -171,8 +171,10 @@ public class AdminDAOImpl implements AdminDAO {
 				admin.setPassword(rs.getString("password"));
 				admin.setId(rs.getInt("id"));
 				return admin;
+			}else {
+				return null;
 			}
-			return null;
+			
 //			6���ͷ�ռ�õ���Դ
 		
 			
@@ -289,6 +291,7 @@ public class AdminDAOImpl implements AdminDAO {
 						user.setUsername(username);
 						user.setPassword(password);
 						user.setId(rs.getInt("id"));
+						System.out.println(user.getUsername()+"---"+user.getPassword());
 						JdbcUtil.release(null,stmt,connection);
 						return user;
 					}

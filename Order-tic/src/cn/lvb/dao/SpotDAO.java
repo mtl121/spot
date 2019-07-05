@@ -8,7 +8,7 @@ public interface SpotDAO {
 
 	
 	public boolean add( Spot spot  );
-	public boolean delete(String name);
+	public boolean delete(int id);
 	
 	public boolean exist(String name);
 	public boolean update( Spot spot   );

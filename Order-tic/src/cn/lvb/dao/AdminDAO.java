@@ -8,7 +8,7 @@ public interface AdminDAO {
 
 	
 	public boolean add( Admin admin  );
-	public boolean delete(String username);
+	public boolean delete(int id);
 	
 	public boolean exist(String username);
 	public boolean update(   Admin admin  );

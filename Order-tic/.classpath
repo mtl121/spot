@@ -23,5 +23,10 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jquery-1.11.1.min.js"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jquery.imagesloaded.min.js"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jquery.isotope.min.js"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jquery.masonry.min.js"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jquery.peity.min.js"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

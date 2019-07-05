@@ -23,9 +23,9 @@ public class EstimateDAOImpl implements EstimateDAO {
 	//添加信息
 	@Override
 	public boolean add(Estimate estimate) {
-		String sql = "insert into estimate(Esti_id,Esti_content,Esti_star, Spot_id, Tou_phone)" + "values(?,?,?,?,?)";
+		String sql = "insert into estimate(Esti_id,Esti_content,Esti_star, Spot_id, Tou_id)" + "values(?,?,?,?,?)";
 		try {
-			qr.update(sql,estimate.getEsti_id(),estimate.getEsti_content(),estimate.getEsti_star(),estimate.getSpot_id(),estimate.getTou_phone());
+			qr.update(sql,estimate.getEsti_id(),estimate.getEsti_content(),estimate.getEsti_star(),estimate.getSpot_id(),estimate.getTou_id());
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -36,7 +36,7 @@ public class EstimateDAOImpl implements EstimateDAO {
 	
 	//删除信息
 	@Override
-	public boolean delete(String id) {
+	public boolean delete(int eid) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -44,10 +44,10 @@ public class EstimateDAOImpl implements EstimateDAO {
 		String sql = "delete from estimate where Esti_id=? ";
 
 		try {
-			System.out.println("*****" + id);
+			System.out.println("*****" + eid);
 			conn = JdbcUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
-			stmt.setString(1, id);
+			stmt.setInt(1, eid);
 			int rows = stmt.executeUpdate();
 
 			if (rows > 0)
@@ -65,7 +65,7 @@ public class EstimateDAOImpl implements EstimateDAO {
 	@Override
 	public boolean update(Estimate bean) {
 		
-		String sql = "update estimate set Esti_content=?," + "Esti_star=?,"+ "Spot_id=?,"  + "Tou_phone=? where Esti_id=?";
+		String sql = "update estimate set Esti_content=?," + "Esti_star=?,"+ "Spot_id=?,"  + "Tou_id=? where Esti_id=?";
 
 		Connection conn = null;
 		PreparedStatement stmt = null;
@@ -77,10 +77,10 @@ public class EstimateDAOImpl implements EstimateDAO {
 
 			stmt.setString(1, bean.getEsti_content());
 			stmt.setString(2, bean.getEsti_star());
-			stmt.setString(3, bean.getSpot_id());
-			stmt.setString(4, bean.getTou_phone());			
+			stmt.setInt(3, bean.getSpot_id());
+			stmt.setInt(4, bean.getTou_id());			
 
-			stmt.setString(5, bean.getEsti_id());
+			stmt.setInt(5, bean.getEsti_id());
 			int rows = stmt.executeUpdate();
 
 			if (rows > 0)
@@ -137,7 +137,7 @@ public class EstimateDAOImpl implements EstimateDAO {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		String sql = "select Esti_id, Esti_content, Esti_star, Spot_id,Tou_phone from estimate limit ?, ? ";
+		String sql = "select Esti_id, Esti_content, Esti_star, Spot_id,Tou_id from estimate limit ?, ? ";
 
 		try {
 			List<Estimate> list = new ArrayList<Estimate>();
@@ -153,11 +153,11 @@ public class EstimateDAOImpl implements EstimateDAO {
 			while (rs.next()) {
 				Estimate bean = new Estimate();
 
-				bean.setEsti_id(rs.getString("Esti_id"));
+				bean.setEsti_id(rs.getInt("Esti_id"));
 				bean.setEsti_content(rs.getString("Esti_content"));
 				bean.setEsti_star(rs.getString("Esti_star"));
-				bean.setSpot_id(rs.getString("Spot_id"));
-				bean.setTou_phone(rs.getString("Tou_phone"));
+				bean.setSpot_id(rs.getInt("Spot_id"));
+				bean.setTou_id(rs.getInt("Tou_id"));
 				
 				list.add(bean);
 			}
